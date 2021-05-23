@@ -79,18 +79,22 @@ public class TradesServiceImpl implements TradesService {
 			if (bean.getVersion() > higherVersion) {
 				// provided new higher trade version entry data for existing TradeId so add it
 				this.repository.save(dto);
+				System.out.println("Trade data added successfully : " + bean.toString());
 			} else if (bean.getVersion() <= higherVersion && tradeVersions.contains(bean.getVersion())) {
 				// provided lower or same trade existing version entry data so override it
 				this.repository.upsert(dto);
+				System.out.println("Trade data updated successfully : " + bean.toString());
 			} else {
 				// can log using logging framework like slf4j
 				// provided lower trade non-existing version so throw an exception
+				System.out.println("Cannot add Lower Trade Version record : " + bean.toString());
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-						"Invalid version for Trade record : " + bean.toString());
+						"Cannot add Trade record : " + bean.toString());
 			}
 		} else {
 			// provided new TradeId so add it
 			this.repository.save(dto);
+			System.out.println("Trade data added successfully : " + bean.toString());
 		}
 	}
 
