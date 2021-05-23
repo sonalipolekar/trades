@@ -7,6 +7,8 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
+
+// using JAVA 8
 sourceCompatibility = '8'
 
 repositories {
@@ -14,8 +16,16 @@ repositories {
 }
 
 dependencies {
+	// to store trades data in Mongo DB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	
+	// to accept trades data as REST API
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// Added for JSON Bean validations
+	implementation 'org.hibernate.validator:hibernate-validator:6.0.13.Final'
+	
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
